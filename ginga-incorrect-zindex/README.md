@@ -4,7 +4,7 @@ It is not possible to correctly apply zIndex between the application plane and t
 
 |  Correct Zindex  | Incorrect zIndex |
 |  :------------:  | :--------------: |
-![image](https://github.com/user-attachments/assets/221dc790-0878-4d90-b406-656a2e468142)|![image](https://github.com/user-attachments/assets/d3883b6d-6d81-4613-ae94-954e585fa0a5)
+![image](https://github.com/gly-engine/third-party-issues/raw/refs/heads/main/screenshots/ginga-correct-zindex.png)|![image](https://github.com/gly-engine/third-party-issues/raw/refs/heads/main/screenshots/ginga-incorrect-zindex.png)
 
 
 ### Test with Ginga
