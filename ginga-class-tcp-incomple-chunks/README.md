@@ -9,7 +9,7 @@ Some NCL ginga implementations do not receive all chunks of an HTTP request.
 ### Test with Ginga
 
 ```
-ginga demo/main/ncl
+ginga demo/main.ncl
 ```
 
 ### Test with TMM
