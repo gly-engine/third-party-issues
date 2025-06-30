@@ -14,7 +14,6 @@ local chunks = 0
 local total_size = 0
 
 local function handler(evt)
-    print(evt.class, evt.type)
     if evt.class ~= 'tcp' then return end
     if evt.type == 'connect' then
         state = 2
