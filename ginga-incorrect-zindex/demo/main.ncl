@@ -19,7 +19,7 @@
     <port id='init1' component='lua1'/>
     <port id='init2' component='lua2'/>
     <port id="portTv" component="tv"/>
-    <media id="tv" src="/home/joaovicente/Documentos/third-party-issues/video.avi" descriptor="descriptorTv"></media>
+    <media id="tv" src="sbtvd-ts://video" descriptor="descriptorTv"></media>
     <media id='lua' descriptor='luaDesc' src='app1.lua'/>
     <media id='lua2' descriptor='luaDesc2' src='app2.lua'/>
     <media id='lua1' descriptor='luaDesc1' src='app3.lua'/>
