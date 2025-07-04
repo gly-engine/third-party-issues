@@ -18,7 +18,7 @@ ginga demo/main.ncl
 ### Test with TMM
 
 ```
-tm-muxer tmm-ncl.xml
+tm-muxer ../tmm-ncl.xml
 ```
 
 ---
