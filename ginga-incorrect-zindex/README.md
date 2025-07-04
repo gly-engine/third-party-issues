@@ -9,12 +9,18 @@ It is not possible to correctly apply zIndex between the application plane and t
 
 ### Test with Ginga
 
+replace `sbtvd-ts://video` with any local avi/mp4 video file
+
 ```
-gingagui ginga-incorrect-zIndex/demo/main.ncl
+ginga demo/main.ncl
 ```
 
 ### Test with TMM
 
 ```
-tm-muxer tmm.xml
+tm-muxer tmm-ncl.xml
 ```
+
+---
+
+Segundo a **ABNT NBR 15606-2** zIndex não se aplica ao plano de media, mas deveria ser discutido para modificação da ABNT.
