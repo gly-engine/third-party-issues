@@ -1,0 +1,13 @@
+<html>
+<script>
+fetch('http://localhost:44642/dtv/mediaplayers/1', {
+  method: 'POST',
+  headers: { 'Content-Type': 'application/json' },
+  body: JSON.stringify({
+    action: 'start',
+    url: `https://dash.akamaized.net/dash264/TestCasesIOP33/adapatationSetSwitching/5/manifest.mpd?${performance.now()}`,
+    pos: {x: 0, y: 0, w: 1280, h: 720}
+  })
+});
+</script>
+</html>
