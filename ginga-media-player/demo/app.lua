@@ -10,7 +10,7 @@ local headers = {['User-Agent'] = 'Ginga (GlyOS;SmartTv/Linux)'}
 local actions = {'prepare','start','pause','resume','stop','unload'}
 local menu = 1
 local debounce = 300
-local lasttime = 0
+local lasttime = -9999
 local lastevt = 'evt'
 local now = 0
 
@@ -56,6 +56,7 @@ local function handler(evt)
         elseif menu < 6 and evt.key == 'CURSOR_DOWN' then
             menu = menu + 1
         elseif evt.key == 'CURSOR_RIGHT' and (now - lasttime) > debounce then
+            print('clicado')
             lasttime = now
             do_something()
         end
@@ -73,7 +74,7 @@ local function tick()
     canvas:attrColor(0x33, 0x33, 0x33, 0x70)
     canvas:clear()
     canvas:attrFont('Tiresias', 20)
-    canvas:attrColor((now - lasttime) < debounce and 'green' or 'red')
+    canvas:attrColor('red')
     canvas:drawText(6, 8 + ((menu-1) * 24), '>')
     canvas:attrColor('white')
     for i = 1, #actions do
@@ -88,6 +89,12 @@ local function tick()
     canvas:drawText(6, 504, 'ccws body: '..ccws_body:sub(201, 300))
     canvas:drawText(6, 536, 'ccws body: '..ccws_body:sub(301, 400))
     canvas:drawText(6, 640, 'evt: '..lastevt)
+    if (now - lasttime) < (debounce*3) then
+        canvas:drawRect('fill', 320, 180, 640, 64)
+        canvas:attrColor('black')
+        canvas:drawRect('frame', 320, 180, 640, 64)
+        canvas:drawText(460, 188, 'C O M A N D O   E N V I A DO !')
+    end
     canvas:flush()
     event.timer(delta, tick)
 end
