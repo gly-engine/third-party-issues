@@ -2,12 +2,16 @@ local canvas = canvas
 
 local horizontal_images = {}
 local vertical_images = {}
+local grad_images = {}
+for i = 1, 2 do
+    grad_images[i] = canvas.new("assets/grad_transp_black_" .. i .. ".png")
+end
 for col = 1, 9 do
     horizontal_images[col] = canvas.new("assets/out_compressed_" .. col .. ".png")
     vertical_images[col]  = canvas.new("assets/out1_compressed_" .. col .. ".png")
 end
 
-local function draw_grids(size, width, height)
+local function draw_initial_grids(size, height)
     local cols = 9
     local rows = math.floor(height / size)
     local number = 1
@@ -17,7 +21,6 @@ local function draw_grids(size, width, height)
             local x = col * size
             local count = col + 1
             local col_img = col + 1
-            if x + size > width or y + size > height then break end
 
             local alpha = math.max(255 - (count - 1) * 25.5, 25)
             alpha = math.floor(alpha)
@@ -84,4 +87,21 @@ local function draw_grids(size, width, height)
     canvas:flush()
 end
 
-draw_grids(80, 1280, 720)
+local function draw_black_n_white_grids(size)
+    local y = 0
+    for i = 0, 1 do
+        local x = 720 + i * size
+        -- fundo branco
+        canvas:attrColor(255, 255, 255, 255)
+        canvas:drawRect("fill", x, y, size, size)
+        -- gradiente transparente para preto, imagem variável
+        canvas:compose(x, y, grad_images[i+1])
+        -- borda amarela
+        canvas:attrColor(255, 255, 0, 255)
+        canvas:drawRect("frame", x, y, size, size)
+    end
+    canvas:flush()
+end
+
+draw_initial_grids(80, 720)
+draw_black_n_white_grids(160)
