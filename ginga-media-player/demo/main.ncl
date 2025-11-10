@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='utf-8'?>
-<ncl>
+<ncl id="ginga-app">
   <head>
     <regionBase><region id='luaRegion' width='100%' height='100%'/></regionBase>
     <descriptorBase><descriptor id='luaDesc' region='luaRegion' focusIndex='0'/></descriptorBase>
