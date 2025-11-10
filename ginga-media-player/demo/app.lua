@@ -36,7 +36,7 @@ local function do_something(confirm)
     if menu == 10 then
         if confirm and id <= 5 then id = id + 1 end
         if not confirm and id > 1 then id = id - 1 end
-    elseif 7 <= menu or menu <= 9 then
+    elseif 7 <= menu and menu <= 9 then
         local r1, r2 = event.post({
             class = 'http',
             type = 'request',
