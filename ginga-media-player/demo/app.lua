@@ -3,11 +3,12 @@ local event = event
 local delta = 100
 local ccws_finished, ccws_status, ccws_error, ccws_body, ccws_post = '', '', '', '', ''
 local base_url = 'http://localhost:44642/dtv/mediaplayers/1'
+local base_url_cap = 'http://localhost:44642/dtv/platform-capabilities'
 local video_url = 'https://yt-dash-mse-test.commondatastorage.googleapis.com/media/car-20120827-manifest.mpd'
 local action_play = '{"url":"%s","action":"%s","pos":{"x":%d,"y":%d,"w":%d,"h":%d}}'
 local action_stop = '{"action":"unload"}'
 local headers = {['User-Agent'] = 'Ginga (GlyOS;SmartTv/Linux)'}
-local actions = {'prepare','start','pause','resume','stop','unload'}
+local actions = {'prepare','start','pause','resume','stop','unload', 'get-mp', 'get-pc'}
 local menu = 1
 local debounce = 300
 local lasttime = -9999
@@ -24,7 +25,16 @@ end
 
 local function do_something()
     ccws_finished, ccws_status, ccws_error, ccws_body = '', '', '', ''
-    if menu == 6 then
+    if menu == 7 or menu == 8 then
+        local r1, r2 = event.post({
+            class = 'http',
+            type = 'request',
+            method = 'get',
+            uri = (menu == 7 and base_url) or base_url_cap,
+            headers = headers
+        })
+        ccws_post = tostring(r1)..' '..tostring(r2)
+    elseif menu == 6 then
         local r1, r2 = event.post({
             class = 'http',
             type = 'request',
@@ -53,7 +63,7 @@ local function handler(evt)
     if evt.class == 'key' and evt.type == 'press' then
         if menu > 1 and evt.key == 'CURSOR_UP' then
             menu = menu - 1
-        elseif menu < 6 and evt.key == 'CURSOR_DOWN' then
+        elseif menu < 8 and evt.key == 'CURSOR_DOWN' then
             menu = menu + 1
         elseif evt.key == 'CURSOR_RIGHT' and (now - lasttime) > debounce then
             print('clicado')
@@ -88,6 +98,7 @@ local function tick()
     canvas:drawText(6, 472, 'ccws body: '..ccws_body:sub(101, 200))
     canvas:drawText(6, 504, 'ccws body: '..ccws_body:sub(201, 300))
     canvas:drawText(6, 536, 'ccws body: '..ccws_body:sub(301, 400))
+    canvas:drawText(6, 568, 'ccws body: '..ccws_body:sub(401, 500))
     canvas:drawText(6, 640, 'evt: '..lastevt)
     if (now - lasttime) < (debounce*3) then
         canvas:drawRect('fill', 320, 180, 640, 64)
