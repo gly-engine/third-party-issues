@@ -34,8 +34,8 @@ local function fixed_loop()
         canvas:drawText(8, 16 * i, console[i].text)
     end
     canvas:flush()
-    event.timer(1, fixed_loop)
+    event.timer(100, fixed_loop)
 end
 
 event.register(event_loop)
-event.timer(1, fixed_loop)
+event.timer(100, fixed_loop)
